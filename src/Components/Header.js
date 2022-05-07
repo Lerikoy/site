@@ -19,26 +19,24 @@ import {
 import Home from '../Pages/Home'
 import Blog from '../Pages/Blog'
 import Agences_tours from '../Pages/Agences_tours'
-import My_map from '../Pages/My_map'
+import Y_Map from '../Pages/Y_Map'
 
+import Personal_area from '../Personal/Personal_area'
 
 
 export default function Navibar() {
 
         const[show, setShow] = useState(false);
-
         const handleClose = () => setShow(false);
         const handleShow = () => setShow(true);
 
-
         const[show_register, setShow_register] = useState(false);
-        
         const handleClose_register = () => setShow_register(false);
         const handleShow_register = () => setShow_register(true); 
 
         return (
             <>
-                <Navbar className='navbar' sticky='top' collapseOnSelect expand="lg" variant="light" bg="none">
+                <Navbar className='navbar' sticky='top' collapseOnSelect expand="lg" variant="light" bg="white">
                     <Container>
                         <Navbar.Brand href="/">
                             <img
@@ -54,7 +52,7 @@ export default function Navibar() {
                                 <Nav.Link href="/" active> Главная </Nav.Link>
                                 <Nav.Link href="/blog"> Блог </Nav.Link>
                                 <Nav.Link href="/agencies_tours"> Туры и агенства </Nav.Link>
-                                <Nav.Link href="/my_map"> Карта </Nav.Link>
+                                <Nav.Link href="/y_map"> Карта </Nav.Link>
                             </Nav>
                             
                             <Button className='register ms-0 me-2 rounded-pill'  variant="outline-primary" onClick={handleShow}>Вход</Button>
@@ -89,7 +87,7 @@ export default function Navibar() {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleClose}> 
+                        <Button variant="primary" href="/personal_area"> 
                         {/* поменять здесь ссылку для авторизации */}
                             Войти
                         </Button>
@@ -102,6 +100,16 @@ export default function Navibar() {
                     </Modal.Header>
                     <Modal.Body>
                             <Form>
+                                <Form.Group controlId="formBasicName">
+                                    <Form.Label className="text-muted">Имя</Form.Label>
+                                    <Form.Control type="password" placeholder=""/>
+                                </Form.Group>
+
+                                <Form.Group controlId="formBasicFirstName">
+                                    <Form.Label className="text-muted">Фамилия</Form.Label>
+                                    <Form.Control type="password" placeholder=""/>
+                                </Form.Group>
+
                                 <Form.Group controlId="formBasicEmail">
                                     <Form.Label className="text-muted">Адрес электронной почты</Form.Label>
                                     <Form.Control type="email" placeholder="@"/>
@@ -121,9 +129,9 @@ export default function Navibar() {
                         <Button variant="secondary" onClick={handleClose_register}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleClose_register}> 
+                        <Button variant="primary" href="/personal_area"> 
                         {/* поменять здесь ссылку для авторизации */}
-                            Войти
+                            Регистрация
                         </Button>
                     </Modal.Footer>
                 </Modal>
@@ -143,8 +151,9 @@ export default function Navibar() {
                         <Route path='/' element={<Home />} />
                         <Route path='/blog' element={<Blog />} />
                         <Route path='/agencies_tours' element={<Agences_tours />} />
-                        <Route path='/my_map' element={<My_map />} />
+                        <Route path='/y_map' element={<Y_Map />} />
 
+                        <Route path='/personal_area' element={<Personal_area/>} />
                     </Routes>
                 </Router>
             </>
