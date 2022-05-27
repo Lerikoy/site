@@ -39,12 +39,7 @@ export default function Navibar() {
                 <Navbar className='navbar' sticky='top' collapseOnSelect expand="lg" variant="light" bg="white">
                     <Container>
                         <Navbar.Brand href="/">
-                            <img
-                                src={logo}
-                                height="40"
-                                width="40"
-                                className="d-inline-block align-top"
-                                alt="Logo" />
+                            <img src={logo} height="40" width="40" className="d-inline-block align-top" alt="Logo" />
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
@@ -54,10 +49,8 @@ export default function Navibar() {
                                 <Nav.Link href="/agencies_tours"> Туры и агенства </Nav.Link>
                                 <Nav.Link href="/y_map"> Карта </Nav.Link>
                             </Nav>
-                            
                             <Button className='register ms-0 me-2 rounded-pill'  variant="outline-primary" onClick={handleShow}>Вход</Button>
                             <Button className='login ms-0 rounded-pill' onClick={handleShow_register}>Регистрация</Button>
-                            
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
