@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap'
-import React, { Component, useState} from 'react'
+import React, { Component, useEffect, useState} from 'react'
 import axios from 'axios'; 
 import {
     Container,
@@ -27,31 +27,74 @@ import Personal_area from '../Personal/Personal_area'
 
 export default function Navibar() {
 
-    const state = {
-        login: '',
-        password: ''
-    };
+    const [token, setToken] = useState()
+    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const [loading, setLoading] = useState()
+    const [formUsername, setFormUsername] = useState()
+    const [formPassword, setFormPassword] = useState()
+    const [ firstName, setFirstName] = useState('')
+    const [ lastName, setLastName] = useState('')
+    const [ username, setUsername] = useState('')
+    const [ email, setEmail] = useState('')
+    const [ dateJoined, setDateJoined] = useState('')
+    const [ error, setError] = useState()
 
     const[show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleChange = (event) => {
-        state.login = event.target.value
+
+    // useEffect(() => {
+    //     if (isLoggedIn) {
+    //         axios.get(`${process.env.REACT_APP_API_URL}/api/user`,
+    //         {
+    //         headers: {
+    //             'Content-Type': 'application/json;charset=utf-8',
+    //         },
+    //         }
+    //     )
+    //     .then(response => {
+    //         if (response.ok) {
+    //           return response.json()
+    //         // setUsername(data.username)
+    //         // setEmail(data.email)
+    //         // setDateJoined(data.date_joined)
+    //         setError(null)
+    //         }
+    //     })
+    //         .catch(error => {
+    //         console.log(error)
+    //         setError('Ошибка, подробности в консоли')
+    //         setIsLoggedIn(false)
+    //         })
+    //         }
+    //     }, [isLoggedIn])
+
+    const submitHandler = e => {
+        e.preventDefault();
+        setLoading(true);
+        axios.post(
+            `${process.env.REACT_APP_API_URL}/api/login`,{
+                username : formUsername,
+                password : formPassword,
+                headers: 'application/json;charset=utf-8'
+            })
+        .then(function (response) {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw Error(`Something went wrong: code ${response.status}`)
+            }
+        })
+        .then((key) => {
+            setToken(key)
+            setError(null)
+        })
+        .catch((error) => {
+            console.log(error)
+            setError('Ошибка, подробности в консоли')
+        })
+        .finally(setLoading(false))
     }
-    const handleChange2 = (event) =>{
-        state.password = event.target.value
-    }
-    const handleClick = async () => {
-        const user = await axios.post('http://localhost:8000/api-auth/login/', { auth: {
-            username: state.login,
-            password: state.password
-        }}).then(function(response) {
-            console.log('Authenticated');
-        }).catch(function(error) {
-            console.log('Error on Authentication');
-            console.log(state);
-        });
-    };
 
         const[show_register, setShow_register] = useState(false);
         const handleClose_register = () => setShow_register(false);
@@ -84,10 +127,8 @@ export default function Navibar() {
                     </Modal.Header>
                     <Modal.Body>
                             <Form>
-                                <label>
-                                    <input type="text" placeholder="Логин" name="login" onChange={handleChange} /><p></p>
-                                    <input type="password" placeholder="Пароль" name="password" onChange={handleChange2} />
-                                </label>
+                                <input type="text" name="username" value={formUsername} onChange={e => setFormUsername(e.target.value)} placeholder="Username"/>
+                                <input type="password" name="password" value={formPassword} onChange={e => setFormPassword(e.target.value)} placeholder="Password"/>
                                 {/* <Form.Group controlId="formBasicEmail">
                                     <Form.Label className="text-muted">Адрес электронной почты</Form.Label>
                                     <Form.Control type="email" placeholder="@"/>
@@ -107,7 +148,7 @@ export default function Navibar() {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" onClick={handleClick}> 
+                        <Button variant="primary" onClick={submitHandler}> 
                         {/* поменять здесь ссылку для авторизации */}
                             Войти
                         </Button>
