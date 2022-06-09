@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
     'django_summernote',
-    'blog',
+    # 'blog',
     'rest_framework', #new
     'users', #new
     'publication',

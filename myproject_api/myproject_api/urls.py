@@ -8,9 +8,9 @@ from publication.views import post_image
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
     path('summernote/', include('django_summernote.urls')),
-    path('api/blog/', include('blog.urls')),
+    # path('api/blog/', include('blog.urls')),
     path('api/post/', include('publication.urls')),
     path('api/post_image/', post_image),
     path('api/register', views.Register_Users, name='user'),
