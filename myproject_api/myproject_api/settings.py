@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'djoser',
     'corsheaders',
     'django_summernote',
-    'images',
     'blog',
     'rest_framework', #new
     'users', #new
+    'publication',
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +101,7 @@ WSGI_APPLICATION = 'myproject_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blog_lyfe',
+        'NAME': 'tourism_yakutia',
         'USER': 'postgres',
         'PASSWORD': '1234',
         'HOST': 'localhost'
